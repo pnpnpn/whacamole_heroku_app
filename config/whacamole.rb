@@ -11,5 +11,9 @@ ENV['HEROKU_APPS'].split(',').each do |app_config|
 
     # you can specify which dynos to watch for each app (default: `web`):
     config.dynos = %w{web worker}
+
+    config.event_handler = lambda do |e|
+      puts "#{app_name} #{e.inspect.to_s}"
+    end
   end
 end
