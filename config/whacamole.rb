@@ -10,7 +10,7 @@ ENV['HEROKU_APPS'].split(',').each do |app_config|
     config.restart_threshold = restart_threshold  # in megabytes. default is 1000 (good for 2X dynos)
 
     # you can specify which dynos to watch for each app (default: `web`):
-    config.dynos = %w{web worker}
+    config.dynos = (ENV['DYNOS'] || 'web,worker').split(',')
 
     config.event_handler = lambda do |e|
       puts "#{app_name} #{e.inspect.to_s}"
